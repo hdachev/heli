@@ -13,7 +13,7 @@ var GAME = {};
 
   var VIEW_ANGLE = 45
     , NEAR = 0.1
-    , FAR = 10000
+    , FAR = 1500
 
   // create a WebGL renderer, camera and a scene
     , renderer = new THREE.WebGLRenderer()
@@ -22,6 +22,9 @@ var GAME = {};
 
   GAME.scene = scene;
   GAME.camera = camera;
+
+  // fog
+  scene.fog = new THREE.Fog( 0x000000, 100, 1000 );
 
   // add the camera to the scene
   scene.add(camera);

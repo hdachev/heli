@@ -1,57 +1,38 @@
 
+(function()
+{
 
-// Setup the camera as a helicopter.
+  // Setup the camera as a helicopter.
 
-var littlebird = GAME.camera;
+  var littlebird = GAME.camera;
 
-GAME.setupLittlebird(littlebird);
-
-
-// Ticker.
-
-var last = Date.now();
-
-GAME.tick = function(time) {
-  littlebird.addGamepad(
-    GAME.pads[0]
-  , time
-  );
-};
+  GAME.setupLittlebird(littlebird);
 
 
-// ADD SOME GEOMETRY
+  // Ticker.
 
-// add some geom
-var park = new THREE.Mesh(
-  new THREE.CubeGeometry(200, 0, 600),
-  new THREE.MeshBasicMaterial({ color: 0x00ccff })
-);
+  var last = Date.now();
 
-park.position.y = -2;
-park.position.z = 100;
-GAME.scene.add(park);
+  GAME.tick = function(time) {
 
-var ndk = new THREE.Mesh(
-  new THREE.CubeGeometry(100, 25, 100),
-  new THREE.MeshBasicMaterial({ color: 0xffcc00 })
-);
+    // control
+    littlebird.addGamepad(
+      GAME.pads[0]
+    , time
+    );
 
-ndk.position.y = 10;
-GAME.scene.add(ndk);
+    // redraw the terrain around the player
+    GAME.redrawTerrain(
+      littlebird.position.x
+    , littlebird.position.z
+    );
+  };
 
-GAME.camera.position.z = 500;
 
-// add the sphere to the scene
+  // Start at X meters above ground.
 
-// create a point light
-var pointLight =
-  new THREE.PointLight(0xFFFFFF);
+  littlebird.position.y = GAME.plotHeight(littlebird.position.x, littlebird.position.z) + 10;
 
-// set its position
-pointLight.position.x = 10;
-pointLight.position.y = 50;
-pointLight.position.z = 130;
-
-// add to the scene
-GAME.scene.add(pointLight);
+}
+());
 
