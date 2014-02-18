@@ -8,6 +8,8 @@
 
   GAME.setupLittlebird(littlebird);
 
+  GAME.startRecording(littlebird);
+
 
   // Ticker.
 
@@ -40,7 +42,10 @@
 ());
 
 
-// fake tracker
+GAME.replayRecording();
+
+
+/* fake tracker
 
 setInterval(
   function() {
@@ -53,14 +58,13 @@ setInterval(
     , py: [GAME.plotHeight(0, 0)]
     , pz: [-50]
 
-    , qx: [0]
-    , qy: [0]
-    , qz: [0]
-    , qw: [1]
+    , qx: [0], qy: [0], qz: [0], qw: [1]
 
     });
 
   }
 , 1000
 );
+
+// */
 
