@@ -93,7 +93,7 @@ var RAND = parkMiller(0x4723235);
 
   // f( x, y )
   GAME.plotHeight = function( x, y ) {
-  	return polarize( noise2D, x + 0x12345, y - 0x54321, 0.00390625 / 4 ) * 256;
+  	return polarize( noise2D, x + 0x12345, y - 0x54321, 0.00390625 / 20 ) * 1000;
   }
 
 }

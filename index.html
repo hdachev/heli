@@ -5,58 +5,6 @@
 </head>
 <body>
 
-<div class='shader' id='project'>
-
-// create a shared variable for the
-// VS and FS containing the normal
-varying float altitude;
-varying float value;
-
-// calc the dot product and clamp
-// 0 -> 1 rather than -1 -> 1
-vec3 light = vec3(0.0,1.0,0.0);
-
-void main() {
-
-    gl_Position = projectionMatrix *
-                  modelViewMatrix *
-                  vec4(position,1.0);
-
-    // stuff for the fragment shader
-    altitude = position.y / 5000.0;
-
-    float depth = sqrt( max( 0.0, 1.0 - gl_Position.z / 20000.0 ) );
-
-    // calculate the dot product of
-    // the light to the vertex normal
-    value = ( max(0.8, dot(normal, light)) ) * depth * 0.5;
-}
-
-</div>
-<div class='shader' id='wlight'>
-
-// same name and type as VS
-varying vec3 vNormal;
-varying float altitude;
-varying float value;
-
-void main() {
-  // float val = value * mod( value, 0.01 ) * 100;
-
-    // feed into our frag colour
-    gl_FragColor = vec4(value * altitude, value * 0.5, value * ( 1.0 - altitude ), 1.0);
-}
-
-</div>
-
-<script>
-
-function getShader( id ) {
-  return document.getElementById( id ).innerText;
-};
-
-</script>
-
 <!-- deps -->
 <script src="three.min.js"></script>
 <script src="stats.min.js"></script>
@@ -70,6 +18,7 @@ function getShader( id ) {
 <script src="lib/terraplane.js"></script>
 
 <script src="lib/bubbleship.js"></script>
+<script src="lib/spline.js"></script>
 <script src="lib/trackers.js"></script>
 
 <script src="lib/blackbox.js"></script>
