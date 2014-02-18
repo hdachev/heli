@@ -26,6 +26,9 @@
       littlebird.position.x
     , littlebird.position.z
     );
+
+    // redraw entity trackers
+    GAME.redrawTrackers(time);
   };
 
 
@@ -35,4 +38,29 @@
 
 }
 ());
+
+
+// fake tracker
+
+setInterval(
+  function() {
+
+    GAME.updateTracker({
+
+      id: "hello"
+
+    , px: [0]
+    , py: [GAME.plotHeight(0, 0)]
+    , pz: [-50]
+
+    , qx: [0]
+    , qy: [0]
+    , qz: [0]
+    , qw: [1]
+
+    });
+
+  }
+, 1000
+);
 

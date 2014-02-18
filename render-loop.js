@@ -16,15 +16,22 @@ var GAME = {};
     , FAR = 1500
 
   // create a WebGL renderer, camera and a scene
-    , renderer = new THREE.WebGLRenderer()
+    , renderer = new THREE.WebGLRenderer({ antialias: true} )
     , camera = new THREE.PerspectiveCamera(VIEW_ANGLE, 1, NEAR, FAR)
-    , scene = new THREE.Scene();
+    , scene = new THREE.Scene()
+
+    , light;
 
   GAME.scene = scene;
   GAME.camera = camera;
 
   // fog
-  scene.fog = new THREE.Fog( 0x000000, 100, 1000 );
+  scene.fog = new THREE.Fog( 0x000000, 10, 1250 );
+
+  // a light
+  // light = new THREE.DirectionalLight( 0xff0000, 1 );
+  // light.position.set( 1, 1, 0 );
+  // scene.add(light);
 
   // add the camera to the scene
   scene.add(camera);
@@ -75,7 +82,7 @@ var GAME = {};
       log.shift();
 
     logbox.innerText = log.join("\n");
-  }
+  };
 
 
   // Hud.
@@ -84,8 +91,11 @@ var GAME = {};
     , spd = box("airspeed");
 
   function updateHud() {
+    if (!camera.getGroundspeed)
+      return;
+
     spd.innerText = Math.round(camera.getGroundspeed() * 3600 / 1000) + " kmh";
-    alt.innerText = Math.round(camera.position.y) + " m";
+    alt.innerText = Math.round(camera.position.y - GAME.plotHeight(camera.position.x, camera.position.z)) + " m";
   }
 
 
