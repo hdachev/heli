@@ -11,15 +11,36 @@
   GAME.startRecording(littlebird);
 
 
+  // Fire the minigun.
+
+  var lastShot = 0;
+
+  function fire() {
+    var now = Date.now();
+
+    // mock firing rate limit.
+    // this obviously needs to evolve into a much more complex weapons control system
+    if (now - lastShot < 50)
+      return;
+
+    lastShot = now;
+    GAME.fireBullet(
+      GAME.camera.position
+    , GAME.camera.quaternion
+    , 1050
+    , 1050
+    );
+  }
+
+
   // Ticker.
 
-  var last = Date.now();
-
   GAME.tick = function(time) {
+    var pad;
 
     // control
     littlebird.addGamepad(
-      GAME.pads[0]
+      pad = GAME.pads[0]
     , time
     );
 
@@ -31,6 +52,13 @@
 
     GAME.redrawTrackers(time);
     GAME.redrawHud();
+
+    // trigger
+    if (pad && pad.buttons[7] > 0.5)
+      fire();
+
+    // bullets
+    GAME.updateBullets(time);
   };
 
 

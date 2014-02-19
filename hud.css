@@ -20,13 +20,13 @@ canvas {
 }
 
 .altitude {
-	top: 55%;
-	right: 25%;
+	top: 42%;
+	right: 22%;
 }
 
 .airspeed {
-	top: 55%;
-	left: 25%;
+	top: 42%;
+	left: 22%;
 }
 
 .hudbox {
