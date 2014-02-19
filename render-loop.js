@@ -63,42 +63,6 @@ var GAME = {};
   document.body.appendChild(stats.domElement);
 
 
-  // Loggers & huD.
-
-  function box(className) {
-    var box = document.createElement("div");
-    box.className = "hudbox " + className;
-    document.body.appendChild(box);
-    return box;
-  }
-
-  var logbox = box("logbox");
-
-  var log = [];
-
-  GAME.log = function() {
-    log.push(Array.prototype.slice.call(arguments).join(" "));
-    if (log.length > 10)
-      log.shift();
-
-    logbox.innerText = log.join("\n");
-  };
-
-
-  // Hud.
-
-  var alt = box("altitude")
-    , spd = box("airspeed");
-
-  function updateHud() {
-    if (!camera.getGroundspeed)
-      return;
-
-    spd.innerText = Math.round(camera.getGroundspeed() * 3600 / 1000) + " kmh";
-    alt.innerText = Math.round(camera.position.y - GAME.plotHeight(camera.position.x, camera.position.z)) + " m";
-  }
-
-
   // Gamepads.
 
   var getGamepads = navigator.webkitGetGamepads && navigator.webkitGetGamepads.bind(navigator)
@@ -152,7 +116,6 @@ var GAME = {};
     // render
     renderer.render(scene, camera);
     stats.update();
-    updateHud();
   }
 
   requestAnimationFrame(nextFrame);

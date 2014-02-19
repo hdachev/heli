@@ -23,20 +23,20 @@
     , time
     );
 
-    // redraw the terrain around the player
+    // redraw stuff
     GAME.redrawTerrain(
       littlebird.position.x
     , littlebird.position.z
     );
 
-    // redraw entity trackers
     GAME.redrawTrackers(time);
+    GAME.redrawHud();
   };
 
 
   // Start at X meters above ground.
 
-  littlebird.position.y = GAME.plotHeight(littlebird.position.x, littlebird.position.z) + 10;
+  littlebird.position.y = GAME.plotHeight(littlebird.position.x, littlebird.position.z) + 2;
 
 }
 ());

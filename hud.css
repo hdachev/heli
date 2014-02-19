@@ -20,13 +20,13 @@ canvas {
 }
 
 .altitude {
-	top: 50%;
-	right: 30%;
+	top: 55%;
+	right: 25%;
 }
 
 .airspeed {
-	top: 50%;
-	left: 30%;
+	top: 55%;
+	left: 25%;
 }
 
 .hudbox {
@@ -39,4 +39,26 @@ canvas {
 	background: white;
 	color: #444;
 	text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
+}
+
+.reticle {
+	display: block;
+	position: fixed;
+
+	left: 50%;
+	top: 50%;
+}
+
+.reticle:after {
+	display: block;
+	position: absolute;
+	content: '';
+
+	left: -25px;
+	top: -25px;
+	width: 50px;
+	height: 50px;
+
+	border: 2px solid white;
+	border-radius: 50px;
 }
