@@ -26,7 +26,7 @@ var GAME = {};
   GAME.camera = camera;
 
   // fog
-  scene.fog = new THREE.Fog( 0x000000, 10, 4000 );
+  // scene.fog = new THREE.Fog( 0x000000, 10, 4000 );
 
   // a light
   // light = new THREE.DirectionalLight( 0xff0000, 1 );
