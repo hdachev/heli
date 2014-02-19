@@ -67,7 +67,7 @@ var GAME = {};
 
   function box(className) {
     var box = document.createElement("div");
-    box.className = className;
+    box.className = "hudbox " + className;
     document.body.appendChild(box);
     return box;
   }

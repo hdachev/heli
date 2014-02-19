@@ -1,6 +1,7 @@
 
 html {
 	font: 18px Consolas;
+	font-weight: bold;
 	color: white;
 }
 
@@ -19,25 +20,23 @@ canvas {
 }
 
 .altitude {
-	display: block;
-	position: fixed;
-	bottom: 50%;
-	right: 35%;
-
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	padding: 5px 10px;
-	background: rgba(0, 0, 0, 0.2);
-	text-shadow: 0px 0px 1px white;
+	top: 50%;
+	right: 30%;
 }
 
 .airspeed {
+	top: 50%;
+	left: 30%;
+}
+
+.hudbox {
 	display: block;
 	position: fixed;
-	bottom: 50%;
-	left: 35%;
 
-	border: 1px solid rgba(255, 255, 255, 0.2);
 	padding: 5px 10px;
-	background: rgba(0, 0, 0, 0.2);
-	text-shadow: 0px 0px 1px white;
+	border-radius: 3px;
+	box-shadow: 0px 0px 1px white;
+	background: white;
+	color: #444;
+	text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
 }
