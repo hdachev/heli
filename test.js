@@ -57,6 +57,10 @@
     if (pad && pad.buttons[7] > 0.5)
       fire();
 
+    // targeting
+    if (pad && pad.buttons[4] > 0.5)
+      GAME.setTargetUnderReticle();
+
     // bullets
     GAME.updateBullets(time);
   };
