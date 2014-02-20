@@ -20,12 +20,22 @@ canvas {
 }
 
 .altitude {
-	top: 42%;
+	top: 45%;
 	right: 22%;
 }
 
+.burner {
+	bottom: 45%;
+	right: 80%;
+}
+
+.engine {
+	bottom: 45%;
+	left: 22%;
+}
+
 .airspeed {
-	top: 42%;
+	top: 45%;
 	left: 22%;
 }
 
