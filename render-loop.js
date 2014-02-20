@@ -18,20 +18,19 @@ var GAME = {};
   // create a WebGL renderer, camera and a scene
     , renderer = new THREE.WebGLRenderer({ antialias: true} )
     , camera = new THREE.PerspectiveCamera(VIEW_ANGLE, 1, NEAR, FAR)
-    , scene = new THREE.Scene()
+    , scene = new THREE.Scene
 
-    , light;
+    , projector = new THREE.Projector
+    , vPrj = new THREE.Vector3;
 
   GAME.scene = scene;
   GAME.camera = camera;
 
-  // fog
-  // scene.fog = new THREE.Fog( 0x000000, 10, 4000 );
-
-  // a light
-  // light = new THREE.DirectionalLight( 0xff0000, 1 );
-  // light.position.set( 1, 1, 0 );
-  // scene.add(light);
+  //
+  GAME.worldToScreen = function(world3) {
+    vPrj.copy(world3);
+    return projector.projectVector(vPrj, camera);
+  };
 
   // add the camera to the scene
   scene.add(camera);
@@ -45,6 +44,10 @@ var GAME = {};
   function resize() {
     var w = window.innerWidth
       , h = window.innerHeight;
+
+    //
+    GAME.screenW = w;
+    GAME.screenH = h;
 
     renderer.setSize(w, h);
     camera.aspect = w / h;

@@ -72,6 +72,13 @@
 
 GAME.replayRecording();
 
+// found better looking coords
+
+GAME.camera.position.set(
+  -821.8047060078767, 668.1117043130289, 11376.514316484781
+);
+
+
 
 /* fake tracker
 
