@@ -1,6 +1,6 @@
 
 html {
-	font: 18px Consolas;
+	font: 16px Consolas;
 	font-weight: bold;
 	color: white;
 }
@@ -29,10 +29,10 @@ canvas {
 .hudbox {
 	padding: 3px 13px;
 	border-radius: 2px;
-	box-shadow: 0px 0px 1px white;
-	background: white;
-	color: rgba(0, 0, 0, 0.8);
-	text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 2px white, inset 0px 0px 1px white;
+	color: white;
+	border: 2px solid white;
+	text-shadow: 0px 0px 1px white;
 }
 
 .hudbox:empty {
@@ -41,7 +41,6 @@ canvas {
 
 .red {
 	background: #ff6544;
-	box-shadow: 0px 0px 1px #ff6544;
 }
 
 .altitude {
