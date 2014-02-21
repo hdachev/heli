@@ -65,7 +65,7 @@ setInterval(function() {
         // ping clients periodically
         if (now - client.ping > 1000) {
           client.ping = now;
-          client.ws.send(PING);
+          client.send(PING);
         }
       }
     }
@@ -97,7 +97,7 @@ function upsertObject(skey, key, raw) {
 
   n = clients.length;
   for (i = 0; i < n; i++)
-    clients[i].ws.send(raw);
+    clients[i].send(raw);
 }
 
 
@@ -134,7 +134,7 @@ function setClientSubscription(client, skeys) {
       // send all shard state to the client
       state = shard.state;
       for (key in state)
-        client.ws.send(state[key]);
+        client.send(state[key]);
     }
   }
 
@@ -183,11 +183,30 @@ function Client(ws) {
 
   // ping straight away
   this.ping = now;
-  ws.send(PING);
+  this.send(PING);
 }
+
+Client.prototype.send = function(msg) {
+  try {
+    this.ws.send(msg);
+  }
+  catch (err) {
+    this.error(err);
+  }
+};
+
+Client.prototype.error = function(e) {
+  console.log('ws/err', e);
+  setClientSubscription(this, []);
+};
 
 server.on('connection', function(ws) {
   var client = new Client(ws);
+
+  // detach the client on error
+  ws.on('error', function(err) {
+    client.error(err);
+  });
 
   ws.on('message', function(msg) {
     var n, cmd;
