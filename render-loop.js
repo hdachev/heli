@@ -1,5 +1,14 @@
 
-var GAME = {};
+
+// core namespace
+
+var GAME = {
+  models: {} // 3d models and the like
+, updateHandlers: {} // object update handlers
+
+  // mp server
+, host: 'localhost:8080'
+};
 
 
 ////////////////////////////////

@@ -1,1 +1,1 @@
-jshint --config lint.json --show-non-errors lib
+jshint --config lint.json --show-non-errors lib server
