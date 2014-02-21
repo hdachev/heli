@@ -96,8 +96,6 @@ function upsertObject(skey, key, raw) {
   clients = shard.clients;
 
   n = clients.length;
-  console.log("HITTING", n, "clients on", skey);
-
   for (i = 0; i < n; i++)
     clients[i].ws.send(raw);
 }
@@ -191,13 +189,8 @@ function Client(ws) {
 server.on('connection', function(ws) {
   var client = new Client(ws);
 
-  console.log("NEW WS");
-
   ws.on('message', function(msg) {
     var n, cmd;
-
-    // DEBUG
-    console.log("MSG >", msg);
 
     n = msg.length;
     if (!n || n > 1024 || /[^ -~]/.test(msg))
