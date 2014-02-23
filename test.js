@@ -38,9 +38,12 @@
   GAME.tick = function(time) {
     var pad;
 
+    // pads
+
+
     // control
     littlebird.addGamepad(
-      pad = GAME.pads[0]
+      pad = GAME.getGamepad()
     , time
     );
 

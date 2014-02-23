@@ -6,8 +6,8 @@ var GAME = {
   models: {} // 3d models and the like
 , updateHandlers: {} // object update handlers
 
-  // mp server
-, host: 'localhost:8080'
+  // game server
+, host: 'drncmdr.herokuapp.com'
 };
 
 
@@ -75,12 +75,6 @@ var GAME = {
   document.body.appendChild(stats.domElement);
 
 
-  // Gamepads.
-
-  var getGamepads = navigator.webkitGetGamepads && navigator.webkitGetGamepads.bind(navigator)
-                 || function() { return navigator.webkitGamepads; };
-
-
   // Next frame.
 
   var lastTick = Date.now()
@@ -106,10 +100,6 @@ var GAME = {
     }
 
     requestAnimationFrame(nextFrame);
-    // setTimeout(nextFrame, 100);
-
-    // poll controller
-    GAME.pads = getGamepads();
 
     // tick simulation
     var tick = GAME.tick;
