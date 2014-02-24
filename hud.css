@@ -1,6 +1,7 @@
 
 html {
-	font: 18px DinPro-Medium, Consolas;
+	font: 16px Consolas;
+	font-weight: bold;
 	color: white;
 }
 

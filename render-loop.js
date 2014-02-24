@@ -7,8 +7,24 @@ var GAME = {
 , updateHandlers: {} // object update handlers
 
   // game server
-, host: 'drncmdr.herokuapp.com'
+  //, server: 'drncmdr.herokuapp.com'
+
+  // constants
+, INTER_RES: 2 // interpolation units per second
 };
+
+(function() {
+  var rev = 1;
+
+  GAME.nextRev = function() {
+    return Math.round(Math.random() * 0xffff);
+  };
+
+  GAME.nextId = function(prefix) {
+    return prefix + Math.round(Math.random() * 0xffff).toString(16);
+  };
+}
+());
 
 
 ////////////////////////////////

@@ -13,9 +13,11 @@
 
   // Fire the minigun.
 
-  var lastShot = 0;
+  var lastShot = 0
+    , lastMissile = 0
+    , vTmp = new THREE.Vector3;
 
-  function fire() {
+  function fireBullet() {
     var now = Date.now();
 
     // mock firing rate limit.
@@ -23,12 +25,43 @@
     if (now - lastShot < 50)
       return;
 
+    GAME.camera.putVec(vTmp);
+
     lastShot = now;
     GAME.fireBullet(
       GAME.camera.position
+    , vTmp
     , GAME.camera.quaternion
     , 1050
     , 1050
+    );
+  }
+
+  function fireMissile() {
+    var now = Date.now()
+      , targ = GAME.getTarget();
+
+    if (now - lastMissile < 250)
+      return;
+    if (!targ)
+      return;
+
+    GAME.camera.putVec(vTmp);
+
+    lastMissile = now;
+    GAME.spawnMissile(
+      GAME.camera.position
+    , vTmp
+    , GAME.camera.quaternion
+    , targ
+    , { speed: 220
+      , range: 1050
+      , turn: Math.PI / 4
+      , blast: 30
+      , falloff: 2
+      , dmg: 100
+      , count: 3
+      }
     );
   }
 
@@ -56,13 +89,20 @@
     GAME.redrawTrackers(time);
     GAME.redrawHud();
 
-    // trigger
-    if (pad && pad.buttons[7] > 0.5)
-      fire();
+    if (pad) {
 
-    // targeting
-    if (pad && pad.buttons[4] > 0.5)
-      GAME.setTargetUnderReticle();
+      // chaingun
+      if (pad.buttons[7] > 0.5)
+        fireBullet();
+
+      // missile rack
+      if (pad.buttons[6] > 0.5)
+        fireMissile();
+
+      // targeting
+      if (pad.buttons[4] > 0.5)
+        GAME.setTargetUnderReticle();
+    }
 
     // bullets
     GAME.updateBullets(time);
