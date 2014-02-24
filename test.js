@@ -55,8 +55,8 @@
     , GAME.camera.quaternion
     , targ
     , { speed: 220
-      , range: 1050
-      , turn: Math.PI / 4
+      , range: 5050
+      , turn: 0.1
       , blast: 30
       , falloff: 2
       , dmg: 100
