@@ -1,7 +1,8 @@
 
+@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
+
 html {
-	font: 16px Consolas;
-	font-weight: bold;
+	font: 16px 'Press Start 2P', Consolas;
 	color: white;
 }
 
@@ -27,12 +28,12 @@ canvas {
 }
 
 .hudbox {
-	padding: 3px 13px;
+	padding: 3px 13px 1px 13px;
 	border-radius: 2px;
-	box-shadow: 0px 0px 2px white, inset 0px 0px 1px white;
+	box-shadow: 0px 0px 1px white, inset 0px 0px 1px white;
 	color: white;
 	border: 2px solid white;
-	text-shadow: 0px 0px 1px white;
+	text-shadow: 0px 0px 2px white;
 }
 
 .hudbox:empty {

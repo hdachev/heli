@@ -3,15 +3,60 @@
 // core namespace
 
 var GAME = {
-  models: {} // 3d models and the like
+
+  // network cfg
+  INTER_RES: 2 // interpolation units per second
+  // , server: 'drncmdr.herokuapp.com'
+
+  // vehicles
+, models: {} // 3d models and the like
+, controls: {} // control setups for playable vehicles
+
+  // infrastructure
 , updateHandlers: {} // object update handlers
 
-  // game server
-  //, server: 'drncmdr.herokuapp.com'
+  // sys channels
+, SIM_FRAME: 'sim'
+, DRAW_FRAME: 'draw'
 
-  // constants
-, INTER_RES: 2 // interpolation units per second
+  // game events
+, PLAYER_KILLED: 'pkil'
+, TRACKER_KILLED: 'ukil'
+, TRACKER_REMOVED: 'urem'
+, TRACKER_ADDED: 'uadd'
+
 };
+
+
+
+// pubsub
+
+(function() {
+
+  // Pubsub.
+
+  var channels = {};
+
+  GAME.subscribe = function(channel, receiver) {
+    if (!channel || typeof channel !== 'string')
+      throw "Bad channel.";
+    if (!channels[channel])
+      channels[channel] = [];
+
+    channels[channel].push(receiver);
+  };
+
+  GAME.publish = function(channel, a, b, c) { // abc are optional callargs
+    var receivers = channels[channel]
+      , i, n = receivers.length;
+    for (i = 0; i < n; i++)
+      receivers[i](a, b, c);
+  };
+
+}
+());
+
+
 
 (function() {
   var rev = 1;
@@ -95,11 +140,16 @@ var GAME = {
 
   var lastTick = Date.now()
     , paused = false
-    , pausing = false;
+    , pausing = false
+
+    , publish = GAME.publish
+    , SIM_FRAME = GAME.SIM_FRAME
+    , DRAW_FRAME = GAME.DRAW_FRAME;
 
   function nextFrame() {
     var now = Date.now()
-      , delta = now - lastTick;
+      , delta = now - lastTick
+      , simDelta = delta;
 
     // more than a minute gone missing means major crysis
     if (delta > 60000) {
@@ -117,22 +167,28 @@ var GAME = {
 
     requestAnimationFrame(nextFrame);
 
-    // tick simulation
-    var tick = GAME.tick;
-    if (tick) {
+    // ----------
+    // SIMULATION
+    // all of our math expects sub-second time res -
+    // catch up without before rendering, in case stuff slowed down
 
-      // all of our math expects sub-second time res
-      while (delta > 250) {
-        delta -= 250;
-        tick(0.25);
-      }
-
-      // tick delta is in seconds
-      tick(delta / 1000);
+    while (simDelta > 250) {
+      simDelta -= 250;
+      publish(SIM_FRAME, 0.25);
     }
 
-    // render
+    publish(SIM_FRAME, simDelta / 1000);
+
+    // -------
+    // DRAWING
+
+    // hud and the like
+    publish(DRAW_FRAME, delta / 1000);
+
+    // 3d layer
     renderer.render(scene, camera);
+
+    // performance
     stats.update();
   }
 
@@ -154,7 +210,7 @@ var GAME = {
       else
         pausing = false;
     }
-  }
+  };
 
 }
 ());
