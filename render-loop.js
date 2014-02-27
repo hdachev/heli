@@ -12,6 +12,9 @@ var GAME = {
 , models: {} // 3d models and the like
 , controls: {} // control setups for playable vehicles
 
+  // equipment registry
+, equipment: {}
+
   // infrastructure
 , updateHandlers: {} // object update handlers
 

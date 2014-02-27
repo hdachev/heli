@@ -45,6 +45,7 @@
     "shadow": false,
     "supernew": true,
     "undef": true,
+    "unused": true,
     "validthis": true,
     "smarttabs": false,
     "proto": false,
