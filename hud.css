@@ -28,12 +28,7 @@ canvas {
 }
 
 .hudbox {
-	padding: 3px 13px 1px 13px;
-	border-radius: 2px;
-	box-shadow: 0px 0px 1px white, inset 0px 0px 1px white;
-	color: white;
-	border: 2px solid white;
-	text-shadow: 0px 0px 2px white;
+	text-shadow: 0 0 2px white;
 }
 
 .hudbox:empty {

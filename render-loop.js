@@ -115,7 +115,6 @@ var GAME = {
     var w = window.innerWidth
       , h = window.innerHeight;
 
-    //
     GAME.screenW = w;
     GAME.screenH = h;
 
