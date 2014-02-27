@@ -24,9 +24,11 @@ var GAME = {
 
   // game events
 , PLAYER_KILLED: 'pkil'
+
 , TRACKER_KILLED: 'ukil'
 , TRACKER_REMOVED: 'urem'
 , TRACKER_ADDED: 'uadd'
+, TRACKER_UPDATED: 'uupd'
 
 };
 
