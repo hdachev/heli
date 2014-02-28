@@ -67,11 +67,11 @@ var GAME = {
   var rev = 1;
 
   GAME.nextRev = function() {
-    return Math.round(Math.random() * 0xffff);
+    return Math.round(Math.random() * 0xffffff);
   };
 
-  GAME.nextId = function(prefix) {
-    return prefix + Math.round(Math.random() * 0xffff).toString(16);
+  GAME.nextId = function() {
+    return Math.round(Math.random() * 0xffffff);
   };
 }
 ());
@@ -170,6 +170,11 @@ var GAME = {
     }
 
     requestAnimationFrame(nextFrame);
+
+    // a zero/neg delta will fuck up things forever,
+    // and since we depend on wall-clock time, stuff can go wrong
+    if (delta < 1)
+      return;
 
     // ----------
     // SIMULATION
