@@ -33,6 +33,7 @@ canvas {
 
 .hudbox:empty {
 	display: none;
+	padding: 4px 8px 2px 8px;
 }
 
 .red {

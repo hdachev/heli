@@ -7,7 +7,7 @@
 
   var littlebird = GAME.createTracker({
     t: 'v'
-  , m: 'bubble'
+  , m: 'bubl'
   , px: [-821.8047060078767]
   , py: [600]
   , pz: [11376.514316484781]
@@ -31,29 +31,8 @@
 
   /* Fire the minigun.
 
-  var lastShot = 0
-    , lastMissile = 0
+  var lastMissile = 0
     , vTmp = new THREE.Vector3;
-
-  function fireBullet() {
-    var now = Date.now();
-
-    // mock firing rate limit.
-    // this obviously needs to evolve into a much more complex weapons control system
-    if (now - lastShot < 50)
-      return;
-
-    GAME.camera.putVec(vTmp);
-
-    lastShot = now;
-    GAME.fireBullet(
-      GAME.camera.position
-    , vTmp
-    , GAME.camera.quaternion
-    , 1050
-    , 1050
-    );
-  }
 
   function fireMissile() {
     var now = Date.now()
@@ -94,10 +73,6 @@
     // moving those to the heli vehicle
 
     if (pad) {
-
-      // chaingun
-      if (pad.buttons[7] > 0.5)
-        fireBullet();
 
       // missile rack
       if (pad.buttons[6] > 0.5)
