@@ -86,17 +86,16 @@ setInterval(function() {
 function upsertObject(skey, key, raw) {
   var now = Date.now()
     , shard = getShard(skey)
-    , clients, i, n;
+    , clients, i;
 
   // keep track -
   shard.state[key] = raw;
   shard.times[key] = now;
 
   // update all subscribers -
+  // length can change during the invocation loop
   clients = shard.clients;
-
-  n = clients.length;
-  for (i = 0; i < n; i++)
+  for (i = 0; i < clients.length; i++)
     clients[i].send(raw);
 }
 

@@ -88,8 +88,7 @@ var RAND = parkMiller(0x4723235);
   // }
 
   var noise = new SimplexNoise() // ( parkMiller( 1 ) )
-    , noise2D = noise.noise2D.bind( noise )
-
+    , noise2D = noise.noise2D.bind( noise );
 
   // f( x, y )
   GAME.plotHeight = function( x, y ) {

@@ -6,7 +6,7 @@ var GAME = {
 
   // network cfg
   INTER_RES: 2 // interpolation units per second
-  // , server: 'drncmdr.herokuapp.com'
+, server: 'drncmdr.herokuapp.com'
 
   // vehicles
 , models: {} // 3d models and the like
@@ -138,14 +138,6 @@ var GAME = {
   resize();
 
 
-  // Stats.
-
-  var stats = new Stats();
-  stats.domElement.style.position = 'absolute';
-  stats.domElement.style.top = '0px';
-  document.body.appendChild(stats.domElement);
-
-
   // Next frame.
 
   var lastTick = Date.now()
@@ -202,9 +194,6 @@ var GAME = {
 
     // 3d layer
     renderer.render(scene, camera);
-
-    // performance
-    stats.update();
   }
 
   requestAnimationFrame(nextFrame);
