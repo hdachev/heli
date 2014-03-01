@@ -37,9 +37,6 @@ var GAME = {
 // pubsub
 
 (function() {
-
-  // Pubsub.
-
   var channels = {};
 
   GAME.subscribe = function(channel, receiver) {
@@ -62,16 +59,25 @@ var GAME = {
 ());
 
 
+// idgen and revgen
 
 (function() {
-  var rev = 1;
 
-  GAME.nextRev = function() {
-    return Math.round(Math.random() * 0xffffff);
+  //
+  GAME.nextId = function() {
+    return Math.round(Math.random() * 0xfffffff);
   };
 
-  GAME.nextId = function() {
-    return Math.round(Math.random() * 0xffffff);
+  //
+  GAME.nextRev = function(prev) {
+    if (prev > 0 && prev < 0xfffffff)
+      return prev + 1;
+    else
+      return 1;
+  };
+
+  GAME.isNewerRev = function(rev, prev) {
+    return rev > prev || (prev - rev > 0xf000000);
   };
 }
 ());
