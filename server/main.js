@@ -29,7 +29,7 @@ setInterval(function() {
   var now = Date.now()
     , skey, shard, dead
     , times, state, clients
-    , key, i, n
+    , key, i
     , client, lag;
 
   for (skey in shards) {
@@ -50,23 +50,22 @@ setInterval(function() {
 
     // drop old clients -
     clients = shard.clients;
-    n = clients.length;
-    for (i = 0; i < n; i ++) {
+    i = clients.length;
+    while (i --) {
       client = clients[i];
       lag = now - client.ts;
       if (lag > 5000) {
         clients.splice(i, 1);
-        i --;
-        n --;
+        continue;
       }
-      else {
-        dead = false;
 
-        // ping clients periodically
-        if (now - client.ping > 1000) {
-          client.ping = now;
-          client.send(PING);
-        }
+      // at least one client is still alive
+      dead = false;
+
+      // ping clients periodically
+      if (now - client.ping > 1000) {
+        client.ping = now;
+        client.send(PING);
       }
     }
 
