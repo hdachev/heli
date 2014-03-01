@@ -93,9 +93,11 @@ function upsertObject(skey, key, raw) {
   shard.times[key] = now;
 
   // update all subscribers -
-  // length can change during the invocation loop
+  // length can change during the invocation loop,
+  // this is why i'm iterating in reverse
   clients = shard.clients;
-  for (i = 0; i < clients.length; i++)
+  i = clients.length;
+  while (i--)
     clients[i].send(raw);
 }
 
