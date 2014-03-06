@@ -6,7 +6,7 @@ var GAME = {
 
   // network cfg
   INTER_RES: 2 // interpolation units per second
-, server: 'drncmdr.herokuapp.com'
+// , server: 'drncmdr.herokuapp.com'
 
   // vehicles
 , models: {} // 3d models and the like
