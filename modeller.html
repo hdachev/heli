@@ -29,6 +29,10 @@
       var camera, scene, renderer;
       var mesh;
 
+      var mouseX = 0
+        , mouseY = 0
+        , tripod = new THREE.Object3D;
+
       function init() {
 
         renderer = new THREE.WebGLRenderer();
@@ -56,6 +60,9 @@
         mesh = new THREE.Mesh( geometry, material );
         scene.add( mesh );
 
+        scene.add(tripod);
+        tripod.add(camera);
+
         //
 
         window.addEventListener( 'resize', onWindowResize, false );
@@ -69,22 +76,20 @@
         renderer.setSize( window.innerWidth, window.innerHeight );
       }
 
-      var mouseX = 0
-        , mouseY = 0;
-
       function animate() {
         requestAnimationFrame( animate );
 
-        camera.position.x += ( mouseX - camera.position.x ) * .05;
-        camera.position.y += ( - mouseY - camera.position.y ) * .05;
+        tripod.rotation.y = ((mouseX * Math.PI) + tripod.rotation.y * 99) / 100;
+        tripod.rotation.x = ((mouseY * Math.PI) + tripod.rotation.x * 49) / 50;
+
         camera.lookAt( scene.position );
 
         renderer.render( scene, camera );
       }
 
       document.addEventListener('mousemove', function(e) {
-        mouseX = ( event.clientX - window.innerWidth / 2 );
-        mouseY = ( event.clientY - window.innerHeight / 2 );
+        mouseX = ( event.clientX / window.innerWidth * 2 - 1 );
+        mouseY = ( event.clientY / window.innerHeight - 0.5 );
       });
 
 
