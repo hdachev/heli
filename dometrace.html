@@ -41,7 +41,7 @@
         var color, f, f2, f3, p, n, vertexIndex,
 
           radius = 8000,
-          geometry  = new THREE.IcosahedronGeometry( radius, 1 );
+          geometry  = new THREE.IcosahedronGeometry( radius, 4 );
 
         for ( var i = 0; i < geometry.faces.length; i ++ ) {
 
@@ -66,7 +66,7 @@
         }
 
 
-        var material = new THREE.MeshBasicMaterial( { color: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
+        var material = new THREE.MeshBasicMaterial( { color: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors, wireframe: true } );
 
         var mesh = new THREE.Mesh( geometry, material );
         scene.add( mesh );
@@ -98,8 +98,8 @@
       }
 
       function onDocumentMouseMove( event ) {
-        mouseX = event.clientX / window.innerWidth - 0.5;
-        mouseY = event.clientY / window.innerHeight - 0.5;
+        mouseX = event.clientX / windowHalfX - 1;
+        mouseY = event.clientY / windowHalfY - 1;
       }
 
       //

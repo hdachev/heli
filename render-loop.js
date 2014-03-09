@@ -102,7 +102,89 @@ var GAME = {
     , scene = new THREE.Scene
 
     , projector = new THREE.Projector
-    , vPrj = new THREE.Vector3;
+    , vPrj = new THREE.Vector3
+
+    , render = function() {
+        renderer.render(scene, camera);
+      };
+
+
+  // POST PROCESSING.
+  if (THREE.EffectComposer)
+    (function() {
+      var composer = new THREE.EffectComposer(renderer)
+        , shader, effect;
+
+      composer.addPass(new THREE.RenderPass(scene, camera));
+
+      // effect = new THREE.ShaderPass( THREE.DotScreenShader );
+      // effect.uniforms['scale'].value = 4;
+      // composer.addPass( effect );
+
+      // effect = new THREE.ShaderPass( THREE.RGBShiftShader );
+      // effect.uniforms['amount'].value = 0.0015;
+      // effect.renderToScreen = true;
+      // composer.addPass( effect );
+
+      // a custom shader
+
+      shader = {
+
+        uniforms: {
+
+          "tDiffuse": { type: "t", value: null },
+          "offset":   { type: "f", value: 1.0 },
+          "darkness": { type: "f", value: 1.0 }
+
+        },
+
+        vertexShader: [
+
+          "varying vec2 vUv;",
+
+          "void main() {",
+
+            "vUv = uv;",
+            "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+          "}"
+
+        ].join("\n"),
+
+        fragmentShader: [
+
+          "uniform float offset;",
+          "uniform float darkness;",
+
+          "uniform sampler2D tDiffuse;",
+
+          "varying vec2 vUv;",
+
+          "void main() {",
+
+            // Eskil's vignette
+
+            "gl_FragColor = texture2D( tDiffuse, vUv ).gbra;",
+
+          "}"
+
+        ].join("\n")
+
+      };
+
+      // a shader pass
+      effect = new THREE.ShaderPass(shader);
+      effect.renderToScreen = true;
+      composer.addPass(effect);
+
+      render = function() {
+        composer.render();
+      };
+    }
+    ());
+
+  //
+
 
   GAME.scene = scene;
   GAME.camera = camera;
@@ -193,7 +275,7 @@ var GAME = {
     publish(DRAW_FRAME, delta / 1000);
 
     // 3d layer
-    renderer.render(scene, camera);
+    render();
   }
 
   requestAnimationFrame(nextFrame);

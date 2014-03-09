@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+
+  <!-- visuals -->
+  <link rel="stylesheet" href="hud.css" type="text/css" />
+
+</head>
+<body>
+
+  <!-- deps -->
+  <script src="three.js"></script>
+
+  <!-- postproc -->
+  <script src="http://mrdoob.github.io/three.js/examples/js/shaders/CopyShader.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/shaders/DotScreenShader.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/shaders/RGBShiftShader.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/shaders/ConvolutionShader.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/shaders/VignetteShader.js"></script>
+
+  <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/MaskPass.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/BloomPass.js"></script>
+
+  <!-- before hacks -->
+  <script src="render-loop.js"></script>
+  <script src="height.js"></script>
+
+  <!-- engine -->
+  <script src="lib/connection.js"></script>
+  <script src="lib/spline.js"></script>
+  <script src="lib/trackers.js"></script>
+  <script src="lib/balistics.js"></script>
+  <script src="lib/missiles.js"></script>
+  <script src="lib/phys.js"></script>
+  <script src="lib/controller.js"></script>
+
+  <!-- vehicles -->
+  <script src="lib/vehicles/bubble.model.js"></script>
+  <script src="lib/vehicles/bubble.control.js"></script>
+
+  <!-- eye candy -->
+  <script src="lib/rotoplane.js"></script>
+  <script src="lib/terraplane.js"></script>
+  <script src="lib/hud.js"></script>
+
+  <!-- pilots -->
+  <script src="lib/blackbox.js"></script>
+  <script src="lib/player.js"></script>
+
+  <!-- after hacks -->
+  <script src="test.js"></script>
+
+</body>
+</html>
